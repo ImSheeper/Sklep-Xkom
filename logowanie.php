@@ -21,13 +21,8 @@
                 </form>
              </div>
              <div class="rejestracja">       
-                <h1>Nie masz konta?</h1>
-                <h3>Zarejestruj się!</h3>
-                <form action="logowanie.php" method="POST">
-                    <input type="text" name="login" placeholder="Login">
-                    <input type="password" name="pass" placeholder="hasło">
-                    <input class="send" type="submit" name="send" value="Zaloguj się">
-                </form>
+                <h1>Nie masz konta?</h1><br>
+                <a href="register.php"><h3 class ="send">Zarejestruj się</h3></a><br>
                 <h3>Dlaczego warto mieć konto w x‑komie</h3>
                 <ul class="customList">
                     <li class="list"><img src="Icons\Zamawiaj.svg">
@@ -58,7 +53,7 @@
                 } else {
                     if(isset($_POST['login']) && isset($_POST['pass'])) {
                         $username = $_POST['login'];
-                        $password = $_POST['pass'];
+                        $password = password_verify($_POST['pass'], PASSWORD_DEFAULT);
                     }
 
                     $sql = "SELECT * FROM user WHERE name = '$username' AND pass = '$password'";
