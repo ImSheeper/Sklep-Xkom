@@ -17,15 +17,15 @@
         </div>
         <div class="verticalBreak"></div>
         <div id="iconContainer">
-                <img class="icon" src="Icons/Account.png"> <a href="logowanie.php">
+            <a class="icon" href="logowanie.php"> <img class="icon" src="Icons/Account.png">
                     <?php
                         include 'conn.php';
                         session_start();
 
                         if(isset($_SESSION['login']) != null) {
-                            echo $_SESSION['login'];
+                            echo "<strong>".$_SESSION['login']."</strong>";
                         } else {
-                            echo "Twoje Konto";
+                            echo "Konto";
                         }
                     ?>
                 </img>
@@ -53,14 +53,18 @@
 
 
     <div id="boxContainer">
-        <div class="boxElement">
-            <p> <b> un.Box </b> </p>
-            <img src="Icons/Box.png" height="10px"> 
-            <h3> Codziennie losuj 3 zniżki </h3>
-            <span> W boxach znajdziesz produkty <br> nawet za 1 zł </span>
+        <div class="boxStyle">
+            <p class="boxElement"> <b> un.Box </b> </p> 
+            <img class="boxElement"src="Icons/Box.png" height="10px"> 
+            <div class="boxElement"><h3> Codziennie losuj 3 zniżki </h3></div>
+            <span class="boxElement"> W boxach znajdziesz produkty nawet za 1 zł </span>
             <div class="discount"> Losuj zniżki </div>
         </div>
-        <div class="recommendedElement"> </div>
+        <div class="recommendedElement"> 
+            <?php
+
+            ?>
+        </div>
     </div>
 </body>
 </html>

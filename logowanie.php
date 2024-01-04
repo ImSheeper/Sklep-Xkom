@@ -47,25 +47,32 @@
                 $username = "";
                 $password = "";
 
-                if(isset($_SESSION['login']) != null) {
-                    header("Location: userDetails.php");
-                    exit();
-                } else {
-                    if(isset($_POST['login']) && isset($_POST['pass'])) {
-                        $username = $_POST['login'];
-                        $password = password_verify($_POST['pass'], PASSWORD_DEFAULT);
-                    }
-
-                    $sql = "SELECT * FROM user WHERE name = '$username' AND pass = '$password'";
-                    $result = $conn->query($sql);
-
-                    if($result->num_rows > 0) {
-                        echo "Sukces!";
-                        $_SESSION['login'] = $username;
-                        $_SESSION['pass'] = $password;
+                    if(isset($_SESSION['login']) != null) {
                         header("Location: userDetails.php");
-                    } else {
                         exit();
+                    } else {
+                        if($_SERVER["REQUEST_METHOD"] == "POST") {
+                            if(isset($_POST['login']) && isset($_POST['pass'])) {
+                                $username = $_POST['login'];
+                                $password = $_POST['pass'];
+                            }
+        
+                            $sql = "SELECT * FROM user WHERE name = '$username'";
+                            $result = $conn->query($sql);
+        
+                            if($result->num_rows > 0) {
+                                $row = $result->fetch_assoc();
+                                $hashedPassword = $row['pass'];
+        
+                                if(password_verify($password, $hashedPassword)) {
+                                    $_SESSION['login'] = $username;
+                                    header("Location: userDetails.php");
+                                } else {
+                                    echo "Niepoprawne hasło";
+                                }
+                            } else {
+                                echo "Użytkownik nie istnieje";
+                        }
                     }
                 }
              ?>
