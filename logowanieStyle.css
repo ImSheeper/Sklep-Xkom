@@ -105,3 +105,8 @@ h1 {
 .customList span {
     margin-left: 20px;
 }
+
+a {
+    text-decoration: none;
+    font-style: normal;
+}
